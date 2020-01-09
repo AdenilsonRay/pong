@@ -16,7 +16,8 @@ var jogoOcorrendo = false
 var barraJogador
 var moverBola
 var barraCpu
-var pontos
+var pontosTela
+var pontos = 0
 var bola
 var animaBarraJOG
 var animaBarraCPU
@@ -153,11 +154,19 @@ function movimentaBola(){
 
     //Verifica se jogo foi finalizado
     if(jogoFinalizado(posicaoBola_LEFT,posicaoBola_TOP)){
-        alert("Jogo FINALIZADO")
-        cancelAnimationFrame(animaBarraCPU)
-        cancelAnimationFrame(animaBarraJOG)
-        cancelAnimationFrame(bolaEmMovimento)
-        return
+        posicaoBola_TOP = 240
+        posicaoBola_LEFT = 490 
+        posicaoBarraJogador_TOP = 200 
+        posicaoBarraCpu_TOP=200
+        alturaBola = 0
+
+        //Muda posicao da barra jogador
+        barraJogador.style.top = posicaoBarraJogador_TOP + "px"
+        //Muda posicao da barra
+        barraCpu.style.top = posicaoBarraCpu_TOP + "px"
+        //Repassa nova possicao para bola
+        document.querySelector("div#dvBola").style.top = posicaoBola_TOP+"px"
+        document.querySelector("div#dvBola").style.left = posicaoBola_LEFT+"px"
     }
 
     bolaEmMovimento = requestAnimationFrame(movimentaBola)
@@ -172,43 +181,9 @@ function jogoFinalizado(posBola_LEFT, posBola_TOP){
          (posicaoBola_TOP+10 <= posicaoBarraJogador_TOP + 100)
         )
        ) {
-           //Se na posicao 1/6 da barra
-           if ((posicaoBola_TOP+10 >= posicaoBarraJogador_TOP) &&
-              (posicaoBola_TOP+10 <= posicaoBarraJogador_TOP+20)){
-                alturaBola = alturaBola > 0 ? 8:-8
-                sentidoBola = 1
-                return false
-             //Se na posicao 2/6 da barra
-            } else if ((posicaoBola_TOP+10 >= posicaoBarraJogador_TOP+20) &&
-                       (posicaoBola_TOP+10 <= posicaoBarraJogador_TOP+40)){
-                alturaBola = alturaBola > 0 ? 6:-6
-                sentidoBola = 1
-                return false
-                    //Se na posicao 3/6 da barra
-            } else if ((posicaoBola_TOP+10 >= posicaoBarraJogador_TOP+40) &&
-                       (posicaoBola_TOP+10 <= posicaoBarraJogador_TOP+50)){
-                alturaBola = alturaBola > 0 ? 4.5:-4.5
-                sentidoBola = 1
-                return false
-                    //Se na posicao 4/6 da barra
-            }else if ((posicaoBola_TOP+10 >= posicaoBarraJogador_TOP+50) &&
-                      (posicaoBola_TOP+10 <= posicaoBarraJogador_TOP+60)){
-                alturaBola = alturaBola > 0 ? 4.5:-4.5
-                sentidoBola = 1
-                return false
-                    //Se na posicao 5/6 da barra
-            }else if ((posicaoBola_TOP+10 >= posicaoBarraJogador_TOP+60) &&
-                      (posicaoBola_TOP+10 <= posicaoBarraJogador_TOP+80)){
-                alturaBola = alturaBola > 0 ? 6:-6
-                sentidoBola = 1
-                return false
-                    //Se na posicao 5/6 da barra
-            }else if ((posicaoBola_TOP+10 >= posicaoBarraJogador_TOP+80) &&
-                      (posicaoBola_TOP+10 <= posicaoBarraJogador_TOP+100)){
-                alturaBola = alturaBola > 0 ? 8:-8
-                sentidoBola = 1
-                return false
-            }
+        alturaBola = ((posicaoBarraJogador_TOP+50)-(posicaoBola_TOP+10))/16
+        sentidoBola = 1
+        return false
     }
 
     //Verifica se bola tocou na barra CPU
@@ -218,43 +193,9 @@ function jogoFinalizado(posBola_LEFT, posBola_TOP){
          (posicaoBola_TOP+10 <= posicaoBarraCpu_TOP + 100)
         )
        ) {
-           //Se na posicao 1/6 da barra
-           if ((posicaoBola_TOP+10 >= posicaoBarraCpu_TOP) &&
-              (posicaoBola_TOP+10 <= posicaoBarraCpu_TOP+20)){
-                alturaBola = alturaBola > 0 ? 8:-8
-                sentidoBola = -1
-                return false
-             //Se na posicao 2/6 da barra
-            } else if ((posicaoBola_TOP+10 >= posicaoBarraCpu_TOP+20) &&
-                       (posicaoBola_TOP+10 <= posicaoBarraCpu_TOP+40)){
-                alturaBola = alturaBola > 0 ? 6:-6
-                sentidoBola = -1
-                return false
-                    //Se na posicao 3/6 da barra
-            } else if ((posicaoBola_TOP+10 >= posicaoBarraCpu_TOP+40) &&
-                       (posicaoBola_TOP+10 <= posicaoBarraCpu_TOP+50)){
-                alturaBola = alturaBola > 0 ? 4.5:-4.5
-                sentidoBola = -1
-                return false
-                    //Se na posicao 4/6 da barra
-            }else if ((posicaoBola_TOP+10 >= posicaoBarraCpu_TOP+50) &&
-                      (posicaoBola_TOP+10 <= posicaoBarraCpu_TOP+60)){
-                alturaBola = alturaBola > 0 ? 4.5:-4.5
-                sentidoBola = -1
-                return false
-                    //Se na posicao 5/6 da barra
-            }else if ((posicaoBola_TOP+10 >= posicaoBarraCpu_TOP+60) &&
-                      (posicaoBola_TOP+10 <= posicaoBarraCpu_TOP+80)){
-                alturaBola = alturaBola > 0 ? 6:-6
-                sentidoBola = -1
-                return false
-                    //Se na posicao 5/6 da barra
-            }else if ((posicaoBola_TOP+10 >= posicaoBarraCpu_TOP+80) &&
-                      (posicaoBola_TOP+10 <= posicaoBarraCpu_TOP+100)){
-                alturaBola = alturaBola > 0 ? 8:-8
-                sentidoBola =- 1
-                return false
-            }
+        alturaBola = ((posicaoBarraCpu_TOP+50)-(posicaoBola_TOP+10))/16
+        sentidoBola = -1
+        return false
     }
 
     //Verifica se bola NAO tocou na barra CPU
@@ -264,7 +205,9 @@ function jogoFinalizado(posBola_LEFT, posBola_TOP){
          (posicaoBola_TOP > posicaoBarraCpu_TOP + 100)
         )
        ) {
-        alert("A CPU perdeu. voce GANHOU")
+        pontos++
+        pontosTela.value = pontos
+        alert("Ponto para voce. PARABENS!!")
         return true
     }
 
@@ -275,7 +218,9 @@ function jogoFinalizado(posBola_LEFT, posBola_TOP){
          (posicaoBola_TOP > posicaoBarraJogador_TOP + 100)
         )
        ) {
-        alert("Voce perdeu. a cpu GANHOU")
+        pontos--
+        pontosTela.value = pontos
+        alert("Ponto para CPU PARABENS!!")
         return true
     }
 
@@ -296,7 +241,7 @@ function iniciandoElementos(){
     document.addEventListener("keydown",moveBarraJogador)
     document.addEventListener("keyup",paraBarraJogador)
     document.querySelector("button#btIniciar").addEventListener("click",iniciarJogo)
-    pontos = document.querySelector("input#txtPontos")
+    pontosTela = document.querySelector("input#txtPontos")
     bola = document.querySelector("div#dvBola")
     barraJogador = document.querySelector("div#dvBarraJogador")
     barraCpu = document.querySelector("div#dvBarraCpu")

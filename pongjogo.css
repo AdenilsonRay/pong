@@ -1,0 +1,33 @@
+#dvJogo{
+    border: 1px solid black;
+    width:1000px;
+    height:500px;
+    background-color:black;
+
+}
+#dvBola{
+    padding-bottom: 3px;
+    padding-right: 3px;
+    width:20px;
+    height:20px;
+    background-color:yellowgreen;
+    border-radius:10px;
+    position: absolute;
+    top :240px;
+    left:490px
+}
+.barra{
+    width:10px;
+    height:100px;
+    background-color:yellow;
+    border-radius:5px;
+    position: absolute;
+    top:200px
+}
+.esquerda{
+   left:10px;
+}
+
+.direita{
+    left:997px
+}
